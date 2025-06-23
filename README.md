@@ -1,4 +1,4 @@
-Here's the revised `README.md` with **template creation instructions placed first**, emphasizing that it's a prerequisite for creating notifications:
+Here's your updated `README.md` with a **direct link to the Postman collection** placed near the top for easy access right after running the app:
 
 ---
 
@@ -9,18 +9,30 @@ A Spring Boot application using SQLite, Docker, and REST APIs to manage Template
 
 ---
 
-## 📦 Technologies Used
+## 🚀 Quick Start
 
-- Spring Boot
-- SQLite3
-- Docker
-- JPA/Hibernate
-- Postman (for testing)
-- JUnit (unit tests)
+After compiling and deploying the application, use the Postman collection to test API endpoints easily.
+
+👉 **[Download the Postman Collection](./postman/ClintWilde-DocMe360.postman_collection.json)**
+
+1. Compile and deploy the app using Docker (see steps below).
+2. Import the collection into Postman.
+3. Use the provided requests to create Templates and Notifications.
 
 ---
 
-## 🚀 How to Run (No Local Java or Maven Required)
+## 📦 Technologies Used
+
+- Spring Boot  
+- SQLite3  
+- Docker  
+- JPA/Hibernate  
+- Postman (for testing)  
+- JUnit (unit tests)  
+
+---
+
+## 🔧 How to Run (No Local Java or Maven Required)
 
 You only need Docker installed. Everything else runs inside the container.
 
@@ -29,7 +41,7 @@ You only need Docker installed. Everything else runs inside the container.
 ```bash
 git clone https://github.com/cwilde1/ClintWilde-DocMe360.git
 cd ClintWilde-DocMe360
-````
+```
 
 ### 2. Build the Docker image
 
@@ -62,7 +74,7 @@ Before creating notifications, you **must create at least one Template**, becaus
 
 ### Endpoint
 
-`POST /template`
+`POST /template`  
 Content-Type: `application/json`
 
 ---
@@ -81,7 +93,7 @@ Once a Template is created, you can reference its ID in the notification request
 
 ### Endpoint
 
-`POST /notification`
+`POST /notification`  
 Content-Type: `application/json`
 
 ---
@@ -104,9 +116,9 @@ Content-Type: `application/json`
 
 ## 🧪 Testing
 
-Use Postman (collection provided in this repo) or any API tool to test the endpoints.
+Use Postman (collection linked at the top) or any API tool to test the endpoints.
 
-To run tests (optional):
+To run unit tests (optional):
 
 ```bash
 ./mvnw test
