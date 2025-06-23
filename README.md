@@ -1,4 +1,4 @@
-````
+````markdown
 # ClintWilde-DocMe360
 
 A lightweight Spring Boot application using SQLite, Docker, and REST APIs to manage Templates and Notifications.
@@ -11,14 +11,14 @@ A lightweight Spring Boot application using SQLite, Docker, and REST APIs to man
 - SQLite3  
 - Docker  
 - JPA/Hibernate  
-- Postman (for API testing)  
-- JUnit (for unit testing)  
+- Postman  
+- JUnit  
 
 ---
 
 ## 🚀 Getting Started
 
-This project runs entirely inside Docker—no need to install Java or Maven locally.
+This project runs entirely inside Docker.
 
 ### 1. Clone the Repository
 
@@ -39,30 +39,23 @@ docker build -t docme360-app .
 docker run -p 8080:8080 --name docme360-container docme360-app
 ```
 
-The application will be accessible at:  
+Access the application at:  
 📍 `http://localhost:8080`
 
 ---
 
-## 🧪 API Testing with Postman
+## 🧪 API Testing
 
-To test the API, use the provided Postman collection:
-
-👉 **[Download Postman Collection](./postman/ClintWilde-DocMe360.postman_collection.json)**
-
-### Steps:
+Use the provided Postman collection:  
+👉 **[Download Postman Collection](https://github.com/cwilde1/ClintWilde-DocMe360/blob/main/postman/ClintWilde-DocMe360.postman_collection.json)**
 
 1. Import the collection into Postman.
-2. Start by creating a Template (required for Notifications).
-3. Use the included sample requests to send Notifications and query data.
+2. Create a Template.
+3. Use its ID to send a Notification.
 
 ---
 
 ## 📌 Step 1: Create a Template
-
-You must create a Template before sending Notifications, since each Notification requires a valid `template_id`.
-
-### Template `POST` Example
 
 ```json
 {
@@ -70,17 +63,12 @@ You must create a Template before sending Notifications, since each Notification
 }
 ```
 
-**Endpoint:**  
 `POST /template`  
 Content-Type: `application/json`
 
 ---
 
 ## 🔔 Step 2: Create a Notification
-
-Once a Template is created, you can reference its ID to send a Notification.
-
-### Notification `POST` Example
 
 ```json
 {
@@ -90,13 +78,12 @@ Once a Template is created, you can reference its ID to send a Notification.
 }
 ```
 
-**Endpoint:**  
 `POST /notification`  
 Content-Type: `application/json`
 
 ---
 
-## 📚 Full API Endpoints
+## 📚 API Endpoints
 
 | Method | URL                  | Description                                            |
 | ------ | -------------------- | ------------------------------------------------------ |
@@ -107,15 +94,14 @@ Content-Type: `application/json`
 | PATCH  | `/template/{id}`     | Partially update a template                            |
 | DELETE | `/template/{id}`     | Delete a template                                      |
 | GET    | `/notification`      | Get all notifications                                  |
-| GET    | `/notification/{id}` | Get a specific notification (includes `content` field) |
+| GET    | `/notification/{id}` | Get a specific notification                            |
 | POST   | `/notification`      | Create a notification                                  |
 
 ---
 
-## ✅ Unit Testing (Optional)
-
-To run backend unit tests:
+## ✅ Unit Testing
 
 ```bash
 ./mvnw test
 ```
+````
