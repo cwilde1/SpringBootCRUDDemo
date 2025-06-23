@@ -20,6 +20,7 @@ import java.util.Optional;
 
 import com.example.demo.model.Notification;
 import com.example.demo.repository.NotificationRepository;
+import com.example.demo.repository.TemplateRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,40 +33,51 @@ public class NotificationController {
     @Autowired
     private NotificationRepository notificationRepository;
 
+    @Autowired
+    private TemplateRepository templateRepository;
+
     @GetMapping
     public ResponseEntity<List<Notification>> getAll() {
         logger.info("getAll()");
         return ResponseEntity.ok(notificationRepository.findAll());
     }
 
-@GetMapping("/{id}")
-public ResponseEntity<?> getById(@PathVariable Long id) {
-    logger.info("getById() called with id: {}", id);
-    Optional<Notification> result = notificationRepository.findById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id) {
+        logger.info("getById() called with id: {}", id);
+        Optional<Notification> result = notificationRepository.findById(id);
 
-    if (result.isPresent()) {
-        Notification n = result.get();
-        String content = n.getTemplate().getBody()
-            .replace("(personal)", Optional.ofNullable(n.getPersonalization()).orElse(""));
+        if (result.isPresent()) {
+            Notification n = result.get();
+            String content = n.getTemplate().getBody()
+                    .replace("(personal)", Optional.ofNullable(n.getPersonalization()).orElse(""));
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("id", n.getId());
-        response.put("phoneNumber", n.getPhoneNumber());
-        response.put("templateId", n.getTemplate().getId());
-        response.put("personalization", n.getPersonalization());
-        response.put("content", content);
+            Map<String, Object> response = new HashMap<>();
+            response.put("id", n.getId());
+            response.put("phoneNumber", n.getPhoneNumber());
+            response.put("templateId", n.getTemplate().getId());
+            response.put("personalization", n.getPersonalization());
+            response.put("content", content);
 
-        return ResponseEntity.ok(response);
-    } else {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Notification not found");
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Notification not found");
+        }
     }
-}
-
 
     @PostMapping
     public ResponseEntity<Notification> create(@RequestBody Notification n) {
         logger.info("create notification");
-        return new ResponseEntity<>(notificationRepository.save(n), HttpStatus.CREATED);
+        // Fetch the full Template entity if only id is provided
+        if (n.getTemplate() != null && n.getTemplate().getId() != null) {
+            templateRepository.findById(n.getTemplate().getId()).ifPresent(n::setTemplate);
+        }
+        Notification saved = notificationRepository.save(n);
+        // Ensure the returned Notification has a fully populated Template
+        if (saved.getTemplate() != null && saved.getTemplate().getId() != null) {
+            templateRepository.findById(saved.getTemplate().getId()).ifPresent(saved::setTemplate);
+        }
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
