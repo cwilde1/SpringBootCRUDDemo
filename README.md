@@ -1,168 +1,113 @@
-
-# DocMe360
-
-A Spring Boot web application for managing Notifications and Templates using SQLite database.
+Here's the revised `README.md` with **template creation instructions placed first**, emphasizing that it's a prerequisite for creating notifications:
 
 ---
 
-## Table of Contents
+````markdown
+# ClintWilde-DocMe360
 
-- [Project Overview](#project-overview)  
-- [Technologies Used](#technologies-used)  
-- [Prerequisites](#prerequisites)  
-- [Setup and Run Locally](#setup-and-run-locally)  
-- [Running with Docker](#running-with-docker)  
-- [API Endpoints](#api-endpoints)  
-- [Testing](#testing)  
-- [Design Decisions](#design-decisions)  
-- [Assumptions](#assumptions)  
-- [References](#references)  
+A Spring Boot application using SQLite, Docker, and REST APIs to manage Templates and Notifications.
 
 ---
 
-## Project Overview
+## 📦 Technologies Used
 
-This application provides REST endpoints to manage Notifications and Templates, storing data in an embedded SQLite database. Notifications personalize Template messages by substituting placeholders.
-
----
-
-## Technologies Used
-
-- Java 17
-- Spring Boot 2.7.x
-- SQLite 3
+- Spring Boot
+- SQLite3
 - Docker
-- JUnit (unit testing)
-- Lombok (for getters/setters)
-- SLF4J + Logback (logging)
+- JPA/Hibernate
+- Postman (for testing)
+- JUnit (unit tests)
 
 ---
 
-## Prerequisites
+## 🚀 How to Run (No Local Java or Maven Required)
 
-- Java JDK 17 (if running locally without Docker)
-- Maven (for building the project locally)
-- Docker (optional, for containerized deployment)
+You only need Docker installed. Everything else runs inside the container.
 
----
+### 1. Clone this repository
 
-## Setup and Run Locally
+```bash
+git clone https://github.com/cwilde1/ClintWilde-DocMe360.git
+cd ClintWilde-DocMe360
+````
 
-1. Clone the repository:
+### 2. Build the Docker image
 
-   ```bash
-   git clone https://github.com/cwilde1/ClintWilde-DocMe360.git
-   cd ClintWilde-DocMe360
-   ```
+```bash
+docker build -t docme360-app .
+```
 
-2. Build the project using Maven:
+### 3. Run the Docker container
 
-   ```bash
-   mvn clean package
-   ```
+```bash
+docker run -p 8080:8080 --name docme360-container docme360-app
+```
 
-3. Run the application:
-
-   ```bash
-   java -jar target/demo-0.0.1-SNAPSHOT.jar
-   ```
-
-4. The application runs by default on [http://localhost:8080](http://localhost:8080)
+The app is now accessible at:
+📍 `http://localhost:8080`
 
 ---
 
-## Running with Docker
+## 📌 First Step: Create a Template
 
-1. Build the Docker image:
+Before creating notifications, you **must create at least one Template**, because Notifications require a valid `template_id`.
 
-   ```bash
-   docker build -t docme360-app .
-   ```
+### Template `POST` JSON example
 
-2. Run the Docker container:
+```json
+{
+  "body": "Hello, (personal). How are you today?"
+}
+```
 
-   ```bash
-   docker run -d -p 8080:8080 --name docme360-container docme360-app
-   ```
+### Endpoint
 
-3. Access the app at [http://localhost:8080](http://localhost:8080)
-
-4. To stop the container:
-
-   ```bash
-   docker stop docme360-container
-   ```
-
-5. To remove the container:
-
-   ```bash
-   docker rm docme360-container
-   ```
+`POST /template`
+Content-Type: `application/json`
 
 ---
 
-## API Endpoints
+## 🔔 Notification `POST` JSON example
 
-### Notifications
+Once a Template is created, you can reference its ID in the notification request:
 
-| Method | Endpoint             | Description                                   | Status Code |
-| ------ | -------------------- | --------------------------------------------- | ----------- |
-| GET    | `/notification`      | Get all notifications                         | 200         |
-| GET    | `/notification/{id}` | Get a notification by ID (with `content`)     | 200         |
-| POST   | `/notification`      | Create a new notification                     | 201         |
+```json
+{
+  "phoneNumber": "1234567890",
+  "template": { "id": 1 },
+  "personalization": "Bob"
+}
+```
 
-### Templates
+### Endpoint
 
-| Method | Endpoint         | Description               | Status Code |
-| ------ | ---------------- | ------------------------- | ----------- |
-| GET    | `/template`      | Get all templates         | 200         |
-| GET    | `/template/{id}` | Get a template by ID      | 200         |
-| POST   | `/template`      | Create a new template     | 201         |
-| PATCH  | `/template/{id}` | Update a template         | 200         |
-| DELETE | `/template/{id}` | Delete a template         | 204         |
+`POST /notification`
+Content-Type: `application/json`
 
 ---
 
-## Testing
+## 🔌 Full API Endpoints
 
-- Unit tests are included and can be run with:
-
-  ```bash
-  mvn test
-  ```
-
----
-
-## Design Decisions
-
-- Used SQLite for simplicity and ease of local setup.
-- Spring Data JPA abstracts database interactions.
-- Custom SQLite dialect to support specific SQL nuances.
-- Docker enables zero-dependency deployment.
-- Logging via SLF4J for easy debugging.
+| Method | URL                  | Description                                            |
+| ------ | -------------------- | ------------------------------------------------------ |
+| GET    | `/template`          | Get all templates                                      |
+| GET    | `/template/{id}`     | Get a specific template                                |
+| POST   | `/template`          | Create a template                                      |
+| PUT    | `/template/{id}`     | Update a template                                      |
+| PATCH  | `/template/{id}`     | Partially update a template                            |
+| DELETE | `/template/{id}`     | Delete a template                                      |
+| GET    | `/notification`      | Get all notifications                                  |
+| GET    | `/notification/{id}` | Get a specific notification (includes `content` field) |
+| POST   | `/notification`      | Create a notification                                  |
 
 ---
 
-## Assumptions
+## 🧪 Testing
 
-- No authentication required as per project instructions.
-- Notification `content` field computed dynamically when fetching by ID.
-- Template body max length set to 1000 characters.
-- Notification personalization can be nullable.
+Use Postman (collection provided in this repo) or any API tool to test the endpoints.
 
----
+To run tests (optional):
 
-## References
-
-- [Spring Boot Documentation](https://spring.io/projects/spring-boot)
-- [SQLite Documentation](https://sqlite.org/index.html)
-- [Docker Documentation](https://docs.docker.com/)
-- [OpenAPI Specification](https://www.openapis.org/)
-- [Lombok](https://projectlombok.org/)
-
----
-
-## Contact
-
-For any questions, please reach out to Clint at clint.wilde@gmail.com.
-
+```bash
+./mvnw test
+```
