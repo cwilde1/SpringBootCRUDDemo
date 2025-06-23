@@ -97,7 +97,7 @@ class DemoApplicationTests {
         mockMvc.perform(post("/notification")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("Created Body")));
     }
 
@@ -148,7 +148,7 @@ class DemoApplicationTests {
         mockMvc.perform(post("/template")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("Created Template")));
     }
 
@@ -190,6 +190,7 @@ class DemoApplicationTests {
         t.setId(1L);
         t.setBody("To Delete");
         Mockito.when(templateRepository.findById(1L)).thenReturn(Optional.of(t));
+        Mockito.when(templateRepository.existsById(1L)).thenReturn(true);
         Mockito.doNothing().when(templateRepository).deleteById(1L);
 
         mockMvc.perform(delete("/template/1"))
