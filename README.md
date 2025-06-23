@@ -1,15 +1,9 @@
+---
+
 ````markdown
 # ClintWilde-DocMe360
 
-A Spring Boot application using SQLite, Docker, and REST APIs to manage Templates and Notifications.
-
----
-
-## 🚀 Quick Start
-
-1. Compile and deploy the app using Docker (see steps below).
-2. Import the collection into Postman. **(./postman/ClintWilde-DocMe360.postman_collection.json)**
-3. Use the provided requests to create Templates and Notifications.
+A lightweight Spring Boot application using SQLite, Docker, and REST APIs to manage Templates and Notifications.
 
 ---
 
@@ -19,44 +13,58 @@ A Spring Boot application using SQLite, Docker, and REST APIs to manage Template
 - SQLite3  
 - Docker  
 - JPA/Hibernate  
-- Postman (for testing)  
-- JUnit (unit tests)  
+- Postman (for API testing)  
+- JUnit (for unit testing)  
 
 ---
 
-## 🔧 How to Run (No Local Java or Maven Required)
+## 🚀 Getting Started
 
-You only need Docker installed. Everything else runs inside the container.
+This project runs entirely inside Docker—no need to install Java or Maven locally.
 
-### 1. Clone this repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/cwilde1/ClintWilde-DocMe360.git
 cd ClintWilde-DocMe360
 ```
 
-### 2. Build the Docker image
+### 2. Build the Docker Image
 
 ```bash
 docker build -t docme360-app .
 ```
 
-### 3. Run the Docker container
+### 3. Run the Docker Container
 
 ```bash
 docker run -p 8080:8080 --name docme360-container docme360-app
 ```
 
-The app is now accessible at:
+The application will be accessible at:  
 📍 `http://localhost:8080`
 
 ---
 
-## 📌 First Step: Create a Template
+## 🧪 API Testing with Postman
 
-Before creating notifications, you **must create at least one Template**, because Notifications require a valid `template_id`.
+To test the API, use the provided Postman collection:
 
-### Template `POST` JSON example
+👉 **[Download Postman Collection](./postman/ClintWilde-DocMe360.postman_collection.json)**
+
+### Steps:
+
+1. Import the collection into Postman.
+2. Start by creating a Template (required for Notifications).
+3. Use the included sample requests to send Notifications and query data.
+
+---
+
+## 📌 Step 1: Create a Template
+
+You must create a Template before sending Notifications, since each Notification requires a valid `template_id`.
+
+### Template `POST` Example
 
 ```json
 {
@@ -64,16 +72,17 @@ Before creating notifications, you **must create at least one Template**, becaus
 }
 ```
 
-### Endpoint
-
+**Endpoint:**  
 `POST /template`  
 Content-Type: `application/json`
 
 ---
 
-## 🔔 Notification `POST` JSON example
+## 🔔 Step 2: Create a Notification
 
-Once a Template is created, you can reference its ID in the notification request:
+Once a Template is created, you can reference its ID to send a Notification.
+
+### Notification `POST` Example
 
 ```json
 {
@@ -83,14 +92,13 @@ Once a Template is created, you can reference its ID in the notification request
 }
 ```
 
-### Endpoint
-
+**Endpoint:**  
 `POST /notification`  
 Content-Type: `application/json`
 
 ---
 
-## 🔌 Full API Endpoints
+## 📚 Full API Endpoints
 
 | Method | URL                  | Description                                            |
 | ------ | -------------------- | ------------------------------------------------------ |
@@ -106,11 +114,9 @@ Content-Type: `application/json`
 
 ---
 
-## 🧪 Testing
+## ✅ Unit Testing (Optional)
 
-Use Postman (collection linked at the top) or any API tool to test the endpoints.
-
-To run unit tests (optional):
+To run backend unit tests:
 
 ```bash
 ./mvnw test
