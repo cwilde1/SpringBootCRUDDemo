@@ -1,7 +1,3 @@
-Here's your updated `README.md` with a **direct link to the Postman collection** placed near the top for easy access right after running the app:
-
----
-
 ````markdown
 # ClintWilde-DocMe360
 
@@ -11,12 +7,8 @@ A Spring Boot application using SQLite, Docker, and REST APIs to manage Template
 
 ## 🚀 Quick Start
 
-After compiling and deploying the application, use the Postman collection to test API endpoints easily.
-
-👉 **[Download the Postman Collection](./postman/ClintWilde-DocMe360.postman_collection.json)**
-
 1. Compile and deploy the app using Docker (see steps below).
-2. Import the collection into Postman.
+2. Import the collection into Postman. **(./postman/ClintWilde-DocMe360.postman_collection.json)**
 3. Use the provided requests to create Templates and Notifications.
 
 ---
