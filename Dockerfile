@@ -1,17 +1,29 @@
-# Use a minimal base image with Java 17
-FROM eclipse-temurin:17-jdk-jammy
+# ---- Stage 1: Build with Maven ----
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 
-# Set the working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# Copy the Spring Boot JAR file (make sure it's built already)
-COPY target/*.jar app.jar
+# Copy source code
+COPY . .
 
-# Ensure the data directory exists for SQLite persistence
+# Build the application
+RUN mvn clean package -DskipTests
+
+# ---- Stage 2: Run with JRE only ----
+FROM eclipse-temurin:17-jdk-jammy
+
+# Set working directory
+WORKDIR /app
+
+# Copy the JAR from the build stage
+COPY --from=build /app/target/*.jar app.jar
+
+# Create SQLite data folder
 RUN mkdir -p /app/data
 
-# Expose the port your app runs on
+# Expose port
 EXPOSE 8080
 
-# Run the Spring Boot application
+# Run the app
 ENTRYPOINT ["java", "-jar", "app.jar"]
