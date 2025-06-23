@@ -47,7 +47,7 @@ Access the application at:
 ## 🧪 API Testing
 
 Use the provided Postman collection:  
-👉 **[Download Postman Collection](https://github.com/cwilde1/ClintWilde-DocMe360/blob/main/postman/ClintWilde-DocMe360.postman_collection.json)**
+👉 **[Download Postman Collection]([https://github.com/cwilde1/ClintWilde-DocMe360/blob/main/postman/ClintWilde-DocMe360.postman_collection.json](https://github.com/cwilde1/ClintWilde-DocMe360/blob/main/DocMe360API.postman_collection.json))**
 
 1. Import the collection into Postman.
 2. Create a Template.
