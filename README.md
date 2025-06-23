@@ -1,6 +1,4 @@
----
-
-````markdown
+````
 # ClintWilde-DocMe360
 
 A lightweight Spring Boot application using SQLite, Docker, and REST APIs to manage Templates and Notifications.
