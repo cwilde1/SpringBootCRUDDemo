@@ -23,7 +23,7 @@ This project runs entirely inside Docker.
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/cwilde1/ClintWilde-DocMe360.git
+git clone https://github.com/cwilde1/SpringBootCRUDDemo.git
 cd ClintWilde-DocMe360
 ```
 
