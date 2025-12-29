@@ -1,9 +1,0 @@
-/home/runner/work/SpringBootCRUDDemo/SpringBootCRUDDemo/src/main/java/com/example/demo/controller/TemplateController.java
-/home/runner/work/SpringBootCRUDDemo/SpringBootCRUDDemo/src/main/java/com/example/demo/DemoApplication.java
-/home/runner/work/SpringBootCRUDDemo/SpringBootCRUDDemo/src/main/java/com/example/demo/controller/CustomErrorController.java
-/home/runner/work/SpringBootCRUDDemo/SpringBootCRUDDemo/src/main/java/com/example/demo/repository/TemplateRepository.java
-/home/runner/work/SpringBootCRUDDemo/SpringBootCRUDDemo/src/main/java/com/example/demo/config/SQLiteDialect.java
-/home/runner/work/SpringBootCRUDDemo/SpringBootCRUDDemo/src/main/java/com/example/demo/repository/NotificationRepository.java
-/home/runner/work/SpringBootCRUDDemo/SpringBootCRUDDemo/src/main/java/com/example/demo/controller/NotificationController.java
-/home/runner/work/SpringBootCRUDDemo/SpringBootCRUDDemo/src/main/java/com/example/demo/model/Template.java
-/home/runner/work/SpringBootCRUDDemo/SpringBootCRUDDemo/src/main/java/com/example/demo/model/Notification.java
