@@ -24,7 +24,7 @@ This project runs entirely inside Docker.
 
 ```bash
 git clone https://github.com/cwilde1/SpringBootCRUDDemo.git
-cd ClintWilde-DocMe360
+cd SpringBootCRUDDemo
 ```
 
 ### 2. Build the Docker Image
